@@ -1,0 +1,15 @@
+/*
+Definicion de estilos propios
+*/
+footer, p.h3 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#tbl-estadisticos .etiqueta {
+    width: 20%;
+}
+
+#tbl-estadisticos .dato {
+    width: 40%;
+}

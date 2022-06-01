@@ -1,0 +1,471 @@
+{% extends "basic/base.html" %}
+
+{% block content %}
+
+    <h1 itemprop="alternativeHeadline">
+        Conjunto de datos de Wisconsin de cáncer de mama
+        <small class="text-secondary">Predecir si el cáncer es benigno o maligno</small>
+    </h1>
+    
+    <p><a itemprop="citation" href="https://www.kaggle.com/uciml/breast-cancer-wisconsin-data" target="_blank">Breast Cancer Wisconsin (Diagnostic) Data Set</a></p>
+    
+    <p itemprop="abstract">Las características se calculan a partir de una imagen digitalizada de una aspiración con aguja fina (FNA) de una masa mamaria. Describen características de los núcleos celulares presentes en la imagen.</p>
+
+    <div class="d-none">
+        <div itemprop="audience" itemscope="itemscope" itemtype="https://schema.org/Audience">
+            <meta itemprop="audienceType" content="doctors" />
+            <meta itemprop="audienceType" content="health personnel" />
+            <meta itemprop="audienceType" content="statistician, statistician" />
+            <meta itemprop="audienceType" content="oncologists" />
+            <meta itemprop="audienceType" content="mathematicians" />
+            <meta itemprop="audienceType" content="epidemiologists" />
+            <meta itemprop="audienceType" content="researchers" />
+        </div>
+        <div itemprop="educationalAlignment" itemscope="itemscope" itemtype="https://schema.org/AlignmentObject">
+            <meta itemprop="alignmentType" content="Requiere conocimiento básico estadistico, inteligencia artificial y ciencias de la salud en materia de cáncer de mama" />
+        </div>
+        <meta itemprop="educationalLevel" content="beginner, intermediate or advanced" />
+        <meta itemprop="isFamilyFriendly" content="False" />
+        <meta itemprop="keywords" content="cáncer de mama, Wisconsin, predicción, estimación, inteligencia artificial, modelo matemático, análisis factorial, regresión logística, análisis discriminante lineal, k-means, matriz de confusion" />
+        <meta itemprop="version" content="1.0" />
+        <meta itemprop="inLanguage" content="Spanish" />
+    </div>
+
+    <div itemscope="itemscope" itemtype="https://schema.org/CreativeWork">
+
+        <div class="d-none">
+            <div itemprop="educationalAlignment" itemscope="itemscope" itemtype="https://schema.org/AlignmentObject">
+                <meta itemprop="alignmentType" content="Requiere conocimiento básico estadistico, ciencias de la salud en materia de cáncer de mama" />
+            </div>
+            <meta itemprop="educationalLevel" content="beginner" />
+            <meta itemprop="keywords" content="cáncer de mama, Wisconsin, estadistica descriptiva" />
+            <meta itemprop="position" content="1" />
+            <meta itemprop="version" content="1.0" />
+            <div itemprop="author" itemscope="itemscope" itemtype="https://schema.org/Person">
+                <meta itemprop="name" content="Rubén Ramírez Gómez" />
+                <meta itemprop="email" content="rramirez@rramirez.com" />
+                <meta itemprop="email" content="213220158@upmh.edu.mx" />
+                <div itemprop="address" itemscope="itemscope">
+                    <meta itemprop="addressCountry" content="MX" />
+                    <meta itemprop="addressRegion" content="Hidalgo" />
+                </div>
+                <div itemprop="alumniOf" itemscope="itemscope" itemtype="https://schema.org/EducationalOrganization">
+                    <meta itemprop="name" content="Universidad Politécnica Metropolitana de Hidalgo" />
+                    <div class="d-none" itemprop="address" itemscope="itemscope">
+                        <meta itemprop="addressCountry" content="MX" />
+                        <meta itemprop="addressRegion" content="Hidalgo" />
+                        <meta itemprop="postalCode" content="43860" />
+                        <meta itemprop="streetAddress" content="Boulevard Acceso a Tolcayuca 1009, Ex Hacienda San Javier, Tolcayuca" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p itemprop="name" class="h2">Estadisticos Descriptivos:</p>
+        
+        <ul class="nav nav-tabs" id="statsTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="mean-tab" data-bs-toggle="tab" data-bs-target="#mean-content" type="button" role="tab" aria-controls="mean-content" aria-selected="true">Media (Mean)</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="se-tab" data-bs-toggle="tab" data-bs-target="#se-content" type="button" role="tab" aria-controls="se-content" aria-selected="false">Error Estándar (SE)</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="worst-tab" data-bs-toggle="tab" data-bs-target="#worst-content" type="button" role="tab" aria-controls="worst-content" aria-selected="false">Worst (worst)</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="statsTabContent">
+            <div class="d-none" itemscope="itemscope" itemtype="https://schema.org/Table">
+                <meta itemprop="name" content="Dimensiones medias celulares" />
+                <meta itemprop="abstract" content="Datos estadistisicos basados en media (conteo, media, desviación estándar, mínimo, máxmimo, primer cuartil, segundo cuartil, tercer cuartil, mediana) sobre datos de la celula: radio, textura, perimetro, área, suavidad, compacidad, concavidad, puntos concavos, simetría y dimensión fractal" />
+                <meta itemprop="accessMode" content="textOnVisual" />
+            </div>
+            <div class="tab-pane fade show active" id="mean-content" role="tabpanel" aria-labelledby="mean-tab">
+            </div>
+            <div class="d-none" itemscope="itemscope" itemtype="https://schema.org/Table">
+                <meta itemprop="name" content="Error estándar en dimensiones celulares" />
+                <meta itemprop="abstract" content="Datos estadistisicos basados en error estandar de medición (conteo, media, desviación estándar, mínimo, máxmimo, primer cuartil, segundo cuartil, tercer cuartil, mediana) sobre datos de la celula: radio, textura, perimetro, área, suavidad, compacidad, concavidad, puntos concavos, simetría y dimensión fractal" />
+                <meta itemprop="accessMode" content="textOnVisual" />
+            </div>
+            <div class="tab-pane fade" id="se-content" role="tabpanel" aria-labelledby="se-tab">
+            </div>
+            <div class="d-none" itemscope="itemscope" itemtype="https://schema.org/Table">
+                <meta itemprop="name" content="Peor dato (más grande) obtenido en las dimensiones celulares" />
+                <meta itemprop="abstract" content="Datos estadistisicos basados en el peor dato (más grande) obtenido (conteo, media, desviación estándar, mínimo, máxmimo, primer cuartil, segundo cuartil, tercer cuartil, mediana) sobre datos de la celula: radio, textura, perimetro, área, suavidad, compacidad, concavidad, puntos concavos, simetría y dimensión fractal" />
+                <meta itemprop="accessMode" content="textOnVisual" />
+            </div>
+            <div class="tab-pane fade" id="worst-content" role="tabpanel" aria-labelledby="worst-tab">
+            </div>
+        </div>
+
+    </div>
+    
+    {% raw %}
+    
+    <script id="tpl-estadistico-opt" type="text/x-handlebars-template">
+        <option value="{{opcion_val}}">{{opcion_txt}}</option>
+    </script>
+    
+    <script id="tpl-estadistico-tr" type="text/x-handlebars-template">
+        <tr>
+            <td class="etiqueta">{{estadistico}}</td>
+            <td class="dato text-end" id="{{estadistico}}-{{tipo}}_1"></td>
+            <td class="dato text-end" id="{{estadistico}}-{{tipo}}_2"></td>
+        </tr>
+    </script>
+    
+    <script id="tpl-grafico" type="text/x-handlebars-template">
+        <img src="{{baseURL}}/{{tipo}}_{{var}}{{#if var2}}_{{var2}}{{/if}}.png" class="img-fluid rounded mx-auto d-block" />
+    </script>
+
+    <script id="tpl-tabla-base" type="text/x-handlebars-template">
+        <table class="table table-striped table-dark table-responsive" id="tbl-estadisticos-{{tipo}}">
+            <thead>
+                <tr>
+                    <th class="etiqueta">Variable:</th>
+                    <th class="dato">
+                        <div class="form-group">
+                            <select class="form-control" id="cboVar1-{{tipo}}" onchange="dataUpdate(1, '{{tipo}}')">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </th>
+                    <th class="dato">
+                        <div class="form-group">
+                            <select class="form-control" id="cboVar2-{{tipo}}" onchange="dataUpdate(2, '{{tipo}}')">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td class="etiqueta">Histograma</td><td class="dato" id="hist_1-{{tipo}}"></td><td class="dato" id="hist_2-{{tipo}}"></td></tr>
+                <tr><td class="etiqueta">Caja</td><td class="dato" id="caja_1-{{tipo}}"></td><td class="dato" id="caja_2-{{tipo}}"></td></tr>
+                <tr><td class="etiqueta">Dispersión</td><td id="dispersion-{{tipo}}" colspan="2"></td></tr>
+            </tbody>
+        </table>
+    </script>
+    
+    {% endraw %}
+    
+    <script type="text/javascript">
+        let baseURL_graf = "{{ url_for("static", filename="graficos") }}";
+        let columnas_stats = {{columnas_stats|safe}};
+        let estadisticos = {{estadisticos|safe}};
+        let vals_estadisticos = {{vals_estadisticos|safe}};
+        let tipos_estadisticos = ["mean", "se", "worst",];
+        
+        let hbTpl = "";
+        let hbTpl2 = "";
+
+        hbTpl = Handlebars.compile($("#tpl-tabla-base")[0].innerHTML);
+        for(tipo of tipos_estadisticos) {
+            $(`#${tipo}-content`).append($(hbTpl({tipo})));
+            hbTpl2 = Handlebars.compile($("#tpl-estadistico-opt")[0].innerHTML);
+            $(`#tbl-estadisticos-${tipo} select`).each((idx, cbo) => {
+                for(col of columnas_stats) {
+                    if(col.endsWith(`_${tipo}`)) {
+                        $(cbo).append($(
+                            hbTpl2({opcion_val: col, opcion_txt: col})
+                        ));
+                    }
+                }
+            });
+            hbTpl2 = Handlebars.compile($("#tpl-estadistico-tr")[0].innerHTML);
+            for(estad of estadisticos.reverse()) {
+                $(`#tbl-estadisticos-${tipo} tbody`).prepend($(
+                    hbTpl2({estadistico: estad, tipo})
+                ));
+            }
+        }
+        
+        let dataUpdate = (varNum, tipo) => {
+            let variable = $(`#cboVar${varNum}-${tipo}`).val();
+            let variable2 = $(`#cboVar${varNum == 1 ? 2 : 1}-${tipo}`).val();
+            
+            for(estad of estadisticos) {
+                $(`#${estad}-${tipo}_${varNum}`).empty();
+                $(`#${estad}-${tipo}_${varNum}`).text(vals_estadisticos[variable][estad]);
+            }
+            
+            $(`#hist_${varNum}-${tipo}, #caja_${varNum}-${tipo}, #dispersion-${tipo}`).empty();
+            hbTpl = Handlebars.compile($("#tpl-grafico")[0].innerHTML);
+            $(`#hist_${varNum}-${tipo}`).append($(
+                hbTpl({baseURL: baseURL_graf, tipo: 'hist', var: variable})
+            ));
+            $(`#caja_${varNum}-${tipo}`).append($(
+                hbTpl({baseURL: baseURL_graf, tipo: 'caja', var: variable})
+            ));
+            if(variable && variable2) {
+                $(`#dispersion-${tipo}`).append($(
+                    hbTpl({baseURL: baseURL_graf, tipo: 'disp', var: variable, var2: variable2})
+                ));
+            }
+        }
+    </script>
+    
+    <div itemscope="itemscope" itemtype="https://schema.org/CreativeWork">
+
+        <div class="d-none">
+            <div itemprop="educationalAlignment" itemscope="itemscope" itemtype="https://schema.org/AlignmentObject">
+                <meta itemprop="alignmentType" content="Requiere conocimiento de modelado matemático e inteligencia artificial, ciencias de la salud en materia de cáncer de mama" />
+            </div>
+            <meta itemprop="educationalLevel" content="beginner" />
+            <meta itemprop="keywords" content="cáncer de mama, Wisconsin, análisis factorial, regresion logística, inteligencia artificial, matriz de confusión" />
+            <meta itemprop="position" content="2" />
+            <meta itemprop="version" content="1.0" />
+            <div itemprop="author" itemscope="itemscope" itemtype="https://schema.org/Person">
+                <meta itemprop="name" content="Jorge Alberto Chavez Alderete" />
+                <meta itemprop="email" content="213220145@upmh.edu.mx" />
+                <div itemprop="address" itemscope="itemscope">
+                    <meta itemprop="addressCountry" content="MX" />
+                    <meta itemprop="addressRegion" content="Chihuahua" />
+                </div>
+                <div itemprop="alumniOf" itemscope="itemscope" itemtype="https://schema.org/EducationalOrganization">
+                    <meta itemprop="name" content="Universidad Politécnica Metropolitana de Hidalgo" />
+                    <div class="d-none" itemprop="address" itemscope="itemscope">
+                        <meta itemprop="addressCountry" content="MX" />
+                        <meta itemprop="addressRegion" content="Hidalgo" />
+                        <meta itemprop="postalCode" content="43860" />
+                        <meta itemprop="streetAddress" content="Boulevard Acceso a Tolcayuca 1009, Ex Hacienda San Javier, Tolcayuca" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p itemprop="name" class="h3">Analisis Factorial + Regresión Logística</p> 
+        <p>Prueba de Kaiser-Meyer-Olkin = {{kmo_model}}</p>
+
+        <div class="row justify-content-start">
+            <div class="col-5">
+                <p>Prueba de Eigenvalores = </p>
+                <ul>
+                    {%for valor in ev%}
+                    <li>{{valor}}</li>
+                    {%endfor%}
+                </ul>
+            </div>
+            <div class="col-7">
+                <p>Eleccion de factores (Prueba_del_codo) = </p>
+                <img itemprop="image" src="{{ url_for("static", filename="graficos/Prueba_del_codo.png") }}" class="img-fluid rounded mx-auto d-block" />
+                <p itemprop="description">Se realiza el modelo predictivo con base en el Analisis Factorial a 6 factores y se aplica Regresion Logistica, se entrena el modelo con el 100% de los datos y se verifica la prediccion con el 100% de los datos y se obtiene la siguiente matriz de confusion</p>
+            </div>
+        </div>
+
+        <p>Matriz de  Confusion</p>
+
+        <div class="d-none" itemscope="itemscope" itemtype="https://schema.org/Table">
+            <meta itemprop="name" content="Matriz de Confusión para Analisis Factorial + Regresión Logística" />
+            <meta itemprop="accessMode" content="textOnVisual" />
+        </div>
+
+        <table class="table table-striped table-dark table-responsive">
+            <tr>
+                <th></th>
+                <th>0 (Benigno)</th>
+                <th>1 (Maligno)</th>
+            </tr>
+            <tr>
+                <th>0 (Benigno)</th>
+                <td>{{cm.0.0}}</td>
+                <td>{{cm.0.1}}</td>
+            </tr>
+            <tr>
+                <th>1 (Maligno)</th>
+                <td>{{cm.1.0}}</td>
+                <td>{{cm.1.1}}</td>
+            </tr>
+        </table>
+    
+    </div>
+
+    <div itemscope="itemscope" itemtype="https://schema.org/CreativeWork">
+
+        <div class="d-none">
+            <div itemprop="educationalAlignment" itemscope="itemscope" itemtype="https://schema.org/AlignmentObject">
+                <meta itemprop="alignmentType" content="Requiere conocimiento de modelado matemático e inteligencia artificial, ciencias de la salud en materia de cáncer de mama" />
+            </div>
+            <meta itemprop="educationalLevel" content="beginner" />
+            <meta itemprop="keywords" content="cáncer de mama, Wisconsin, análisis discriminante lineal, regresion logística, inteligencia artificial, matriz de confusión" />
+            <meta itemprop="position" content="3" />
+            <meta itemprop="version" content="1.0" />
+            <div itemprop="author" itemscope="itemscope" itemtype="https://schema.org/Person">
+                <meta itemprop="name" content="Jorge Alberto Chavez Alderete" />
+                <meta itemprop="email" content="213220145@upmh.edu.mx" />
+                <div itemprop="address" itemscope="itemscope">
+                    <meta itemprop="addressCountry" content="MX" />
+                    <meta itemprop="addressRegion" content="Chihuahua" />
+                </div>
+                <div itemprop="alumniOf" itemscope="itemscope" itemtype="https://schema.org/EducationalOrganization">
+                    <meta itemprop="name" content="Universidad Politécnica Metropolitana de Hidalgo" />
+                    <div class="d-none" itemprop="address" itemscope="itemscope">
+                        <meta itemprop="addressCountry" content="MX" />
+                        <meta itemprop="addressRegion" content="Hidalgo" />
+                        <meta itemprop="postalCode" content="43860" />
+                        <meta itemprop="streetAddress" content="Boulevard Acceso a Tolcayuca 1009, Ex Hacienda San Javier, Tolcayuca" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p itemprop="name" class="h3">Analisis Discriminante Lineal + Regresión Logística</p> 
+        <p itemprop="description">Se realiza el modelo predictivo con base en el Analisis Discriminante Lineal a 1 factores y se aplica Regresion Logistica, se entrena el modelo con el 100% de los datos y se verifica la prediccion con el 100% de los datos y se obtiene la siguiente matriz de confusion</p>
+        
+        <p>Matriz de  Confusion</p>
+
+        <div class="d-none" itemscope="itemscope" itemtype="https://schema.org/Table">
+            <meta itemprop="name" content="Matriz de Confusión para Analisis Discriminante Lineal + Regresión Logística" />
+            <meta itemprop="accessMode" content="textOnVisual" />
+        </div>
+        
+        <table class="table table-striped table-dark table-responsive">
+            <tr>
+                <th></th>
+                <th>0 (Benigno)</th>
+                <th>1 (Maligno)</th>
+            </tr>
+            <tr>
+                <th>0 (Benigno)</th>
+                <td>{{cmAD.0.0}}</td>
+                <td>{{cmAD.0.1}}</td>
+            </tr>
+            <tr>
+                <th>1 (Maligno)</th>
+                <td>{{cmAD.1.0}}</td>
+                <td>{{cmAD.1.1}}</td>
+            </tr>
+        </table>
+
+    </div>
+
+    <div itemscope="itemscope" itemtype="https://schema.org/CreativeWork">
+
+        <div class="d-none">
+            <div itemprop="educationalAlignment" itemscope="itemscope" itemtype="https://schema.org/AlignmentObject">
+                <meta itemprop="alignmentType" content="Requiere conocimiento de modelado matemático e inteligencia artificial, ciencias de la salud en materia de cáncer de mama" />
+            </div>
+            <meta itemprop="educationalLevel" content="beginner" />
+            <meta itemprop="keywords" content="cáncer de mama, Wisconsin, clustering, k-means, inteligencia artificial, matriz de confusión" />
+            <meta itemprop="position" content="4" />
+            <meta itemprop="version" content="1.0" />
+            <div itemprop="author" itemscope="itemscope" itemtype="https://schema.org/Person">
+                <meta itemprop="name" content="Rubén Ramírez Gómez" />
+                <meta itemprop="email" content="rramirez@rramirez.com" />
+                <meta itemprop="email" content="213220158@upmh.edu.mx" />
+                <div itemprop="address" itemscope="itemscope">
+                    <meta itemprop="addressCountry" content="MX" />
+                    <meta itemprop="addressRegion" content="Hidalgo" />
+                </div>
+                <div itemprop="alumniOf" itemscope="itemscope" itemtype="https://schema.org/EducationalOrganization">
+                    <meta itemprop="name" content="Universidad Politécnica Metropolitana de Hidalgo" />
+                    <div class="d-none" itemprop="address" itemscope="itemscope">
+                        <meta itemprop="addressCountry" content="MX" />
+                        <meta itemprop="addressRegion" content="Hidalgo" />
+                        <meta itemprop="postalCode" content="43860" />
+                        <meta itemprop="streetAddress" content="Boulevard Acceso a Tolcayuca 1009, Ex Hacienda San Javier, Tolcayuca" />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p itemprop="name" class="h3">K-Means</p>
+        
+        <div class="row justify-content-start">
+            <div class="col-5">
+                <p>Inertia = </p>
+                <ul>
+                    {%for valor in inertias%}
+                    <li>{{valor}}</li>
+                    {%endfor%}
+                </ul>
+            </div>
+            <div class="col-7">
+                <p>Eleccion de factores (Prueba_del_codo) = </p>
+                <img itemprop="image" src="{{ url_for("static", filename="graficos/km-inertia.png") }}" class="img-fluid rounded mx-auto d-block" />
+                <p itemprop="description">Se realiza el modelo declasificación con base en el Analisis K-Means a 2 clusters, se entrena el modelo con el 100% de los datos y se verifica la prediccion con el 100% de los datos y se obtiene la siguiente matriz de confusion</p>
+            </div>
+        </div>
+
+        <p>Matriz de  Confusion</p>
+
+        <div class="d-none" itemscope="itemscope" itemtype="https://schema.org/Table">
+            <meta itemprop="name" content="Matriz de Confusión para K-Means" />
+            <meta itemprop="accessMode" content="textOnVisual" />
+        </div>
+
+        <table class="table table-striped table-dark">
+            <tr>
+                <th></th>
+                <th>0 (Benigno)</th>
+                <th>1 (Maligno)</th>
+            </tr>
+            <tr>
+                <th>0 (Benigno)</th>
+                <td>{{km_cm.0.0}}</td>
+                <td>{{km_cm.0.1}}</td>
+            </tr>
+            <tr>
+                <th>1 (Maligno)</th>
+                <td>{{km_cm.1.0}}</td>
+                <td>{{km_cm.1.1}}</td>
+            </tr>
+        </table>
+
+        <p>Comparativo en dispersion de grupos</p>
+
+        <div class="row" itemscope="itemscope" itemtype="https://schema.org/Table">
+            <meta itemprop="name" content="Comparacion de Clusters entre datos estimados y datos reales" />
+            <meta itemprop="accessMode" content="textOnVisual" />
+            <div class="col-6">
+                <select class="form-control" id="cboCmpVar1" onchange="showCmp()">
+                    <option value=""></option>
+                </select>
+            </div>
+            <div class="col-6">
+                <select class="form-control" id="cboCmpVar2" onchange="showCmp()">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-6">
+                Valores Reales
+                <div id="dispCmpReal"></div>
+            </div>
+            <div class="col-6">
+                Valores Calculados
+                <div id="dispCmpCalc"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+        hbTpl2 = Handlebars.compile($("#tpl-estadistico-opt")[0].innerHTML);
+        for(cbo of ['#cboCmpVar1', '#cboCmpVar2']) {
+            for(col of columnas_stats) {
+                $(cbo).append($(
+                    hbTpl2({opcion_val: col, opcion_txt: col})
+                ));
+            }
+        }
+
+        let showCmp = () => {
+            let var1 = $("#cboCmpVar1").val();
+            let var2 = $("#cboCmpVar2").val();
+            $(`#dispCmpReal, #dispCmpCalc`).empty();
+            if(var1 && var2) {
+                hbTpl = Handlebars.compile($("#tpl-grafico")[0].innerHTML);
+                $(`#dispCmpReal`).append($(
+                    hbTpl({baseURL: baseURL_graf, tipo: 'disp', var: var1, var2: var2})
+                ));
+                $(`#dispCmpCalc`).append($(
+                    hbTpl({baseURL: baseURL_graf, tipo: 'km-disp', var: var1, var2: var2})
+                ));
+            }
+        }
+    </script>
+
+{% endblock %}
