@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Lang" content="es-mx" />
+    <meta name="author" content="Ruben Ramirez Gomez RAGR8602025L7 rramirez@rramirez.com" />
+    <meta http-equiv="Reply-to" content="rramirez@rramirez.com" />
+    <meta name="creation-date" content="2020-02-02" scheme="YYYY-MM-DD" />
+    <meta name="revisit-after" content="15 days" />
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Wisconsin de cáncer de mama</title>
+    <link rel="icon" href="{{ url_for("static", filename="st_1.png") }}" type="image/png" />
+    <link rel="stylesheet" href="{{ url_for("static", filename="basic.css") }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js" integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body class="bg-dark text-light">
+    <nav class="navbar navbar-dark bg-dark navbar-expand-md">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url_for('index') }}">
+                <img src="{{ url_for("static", filename="st_4.png") }}" height="35" class="d-inline-block align-text-top">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" itemscope="itemscope" itemtype="http://schema.org/BreadcrumbList">
+                    <li class="nav-item" itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem">
+                        <a itemprop="item" class="nav-link" href="{{ url_for('index') }}">
+                            <span itemprop="name">Inicio</span>
+                        </a>
+                        <meta itemprop="position" content="1" />
+                    </li>
+                    <li class="nav-item" itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem">
+                        <a itemprop="item" class="nav-link" href="{{ url_for('crear_graficos') }}">
+                            <span itemprop="name">Crear Graficos</span>
+                        </a>
+                        <meta itemprop="position" content="2" />
+                    </li>
+                    <li class="nav-item" itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem">
+                        <a itemprop="item" class="nav-link" href="{{ url_for('crear_modelos') }}">
+                            <span itemprop="name">Crear Modelos</span>
+                        </a>
+                        <meta itemprop="position" content="3" />
+                    </li>
+                    <li class="nav-item" itemprop="itemListElement" itemscope="itemscope" itemtype="http://schema.org/ListItem">
+                        <a itemprop="item" class="nav-link" href="{{ url_for('crear_reportes') }}">
+                            <span itemprop="name">Crear Reportes</span>
+                        </a>
+                        <meta itemprop="position" content="4" />
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </nav>
+
+    {% if mensajes %}
+        <div class="container">
+            {% for msg in mensajes %}
+                {% include 'mensaje.html' %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div itemscope="itemscope" itemtype="https://schema.org/Report">
+
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <footer class="text-center">
+            <div>&copy; 2022 | Todos los derechos reservados | UMPH - MIA | Inteligencia de Negocios | Web Semántica</div>
+            <div>
+                <span itemprop="creator" itemscope="itemscope" itemtype="https://schema.org/Person">
+                    <a itemprop="email" href="mailto:213220145@upmh.edu.mx">
+                        <span itemprop="name">Jorge Alberto Chavez Alderete</span>
+                    </a>
+                    <div class="d-none" itemprop="address" itemscope="itemscope">
+                        <meta itemprop="addressCountry" content="MX" />
+                        <meta itemprop="addressRegion" content="Chihuahua" />
+                    </div>
+                    <div class="d-none" itemprop="alumniOf" itemscope="itemscope" itemtype="https://schema.org/EducationalOrganization">
+                        <meta itemprop="name" content="Universidad Politécnica Metropolitana de Hidalgo" />
+                        <div class="d-none" itemprop="address" itemscope="itemscope">
+                            <meta itemprop="addressCountry" content="MX" />
+                            <meta itemprop="addressRegion" content="Hidalgo" />
+                            <meta itemprop="postalCode" content="43860" />
+                            <meta itemprop="streetAddress" content="Boulevard Acceso a Tolcayuca 1009, Ex Hacienda San Javier, Tolcayuca" />
+                        </div>
+                    </div>
+                </span> |
+                <span itemprop="creator" itemscope="itemscope" itemtype="https://schema.org/Person">
+                    <meta itemprop="email" content="rramirez@rramirez.com" />
+                    <a itemprop="email" href="mailto:213220158@upmh.edu.mx">
+                        <span itemprop="name">Ruben Ramirez Gomez</span>
+                    </a>
+                    <div class="d-none" itemprop="address" itemscope="itemscope">
+                        <meta itemprop="addressCountry" content="MX" />
+                        <meta itemprop="addressRegion" content="Hidalgo" />
+                    </div>
+                    <div class="d-none" itemprop="alumniOf" itemscope="itemscope" itemtype="https://schema.org/EducationalOrganization">
+                        <meta itemprop="name" content="Universidad Politécnica Metropolitana de Hidalgo" />
+                        <div class="d-none" itemprop="address" itemscope="itemscope">
+                            <meta itemprop="addressCountry" content="MX" />
+                            <meta itemprop="addressRegion" content="Hidalgo" />
+                            <meta itemprop="postalCode" content="43860" />
+                            <meta itemprop="streetAddress" content="Boulevard Acceso a Tolcayuca 1009, Ex Hacienda San Javier, Tolcayuca" />
+                        </div>
+                    </div>
+                </span>
+            </div>
+        </footer>
+
+    </div>
+
+</body>
+</html>

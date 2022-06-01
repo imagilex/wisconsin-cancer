@@ -1,0 +1,24 @@
+{% extends "basic/base.html" %}
+
+{% block content %}
+
+<h1>{{titulo}}</h1>
+
+<p>Este proceso tardará varios minutos, desea continuar?</p>
+
+<form method="POST" autocomplete="off">
+    <input type="hidden" name="continue" value="true" />
+
+    <div class="mb-3">
+        <label for="pwd" class="form-label">Contraseña</label>
+        <input type="password" class="form-control" id="pwd" name="pwd" required="required" />
+    </div>
+
+    <div class="d-grid gap-2">
+        <button class="btn btn-primary" type="submit">
+            Sí, comprendo que el proceso trardará varios minutos y deseo continuar.
+        </button>
+    </div>
+</form>
+
+{% endblock %}
